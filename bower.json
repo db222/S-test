@@ -1,0 +1,20 @@
+{
+  "name": "S-test",
+  "version": "0.0.0",
+  "homepage": "https://github.com/db222/S-test",
+  "authors": [
+    "Derek <derek.b26@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-ui-router": "~0.2.15"
+  }
+}
