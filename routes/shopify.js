@@ -2,54 +2,80 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-var API_KEY = 'fe47169d605a535fd4ccd2f850794a4f';
-var PASSWD = '9d5283f93b55448ca33680f28bfc2210';
-var STORE_NAME = 'levisproxytest';
+var API_KEY = 'd465f4a1eccbf2b77607611d07afaa57';
+var PASSWD = 'c2e6b4e4fc04fe1d4b35e63da97f1e22';
+var STORE_NAME = 'cheeseemporium';
+
+
+function createURL(path) {
+  return 'https://' + API_KEY + ':' + PASSWD + '@' + STORE_NAME + '.myshopify.com' + path;
+}
 
 router.get('/get', function(req, res) {
 
-	var path = req.query.path;
+  var path = req.query.path;
 
-	res.set({'Content-Type': 'application/json'});
+  res.set({'Content-Type': 'application/json'});
 
-	request('https://' + API_KEY + ':' + PASSWD + '@' + STORE_NAME + '.myshopify.com' + path
-		, function (error, response, body) {
-			if (!error && response.statusCode == 200) {
-				res.status(200).send(body);
-			}
-		}
-	);
+  request(createURL(path)
+    , function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        res.status(200).send(body);
+      }
+    }
+  );
 });
 
 router.post('/post', function(req, res){
+  var path = req.query.path;
+  var requestData = req.body;
 
-	var path = req.query.path
-		, requestData = req.body
-		;
+  request({
+    url: createURL(path)
+    , method: "POST"
+    , json: true
+    , headers: {
+      "Content-Type": "application/json"
+    }
+    , body: requestData
+  }
+  , function (error, response, body) {
+      console.log('response status code', response.statusCode);
+      console.log(body);
+      if (!error && response.statusCode === 200 || response.statusCode === 201) {
+        res.status(200).send(body);
+      } else {
+        console.log('error', error);
+        //console.log(response);
+        res.status(500).send(body);
+      }
+  });
+});
 
-	console.log(requestData);
+router.put('/put', function(req, res) {
+  var path = req.query.path;
+  var requestData = req.body;
 
-	request({
-		url: 'https://' + API_KEY + ':' + PASSWD + '@' + STORE_NAME + '.myshopify.com' + path
-		, method: "POST"
-		, json: true
-		, headers: {
-			"content-type": "application/json"
-		}
-		, body: JSON.stringify(requestData)
-	}
-	, function (error, response, body) {
-
-			console.log(response.statusCode);
-
-			if (!error && response.statusCode === 200 || response.statusCode === 201) {
-				res.status(200).send(body);
-			} else {
-				console.log(error);
-				//console.log(response);
-				res.status(500).send(body);
-			}
-	});
+  request({
+    url     : createURL(path),
+    method  : 'PUT',
+    json    : true,
+    headers : {
+      "Content-Type": "application/json"
+    },
+    body    : requestData
+  }, 
+  function (error, response, body) {
+      console.log(response.statusCode);
+      console.lo
+      if (!error && response.statusCode === 200 || response.statusCode === 201) {
+        res.status(200).send(body);
+      } else {
+        console.log('the error : ', error);
+        //console.log(response);
+        res.status(500).send(body);
+      }
+  });
 });
 
 module.exports = router;

@@ -1,0 +1,29 @@
+<div class='container' id='product-editor-container' ng-model='product'>
+  <h3>Title : {{product.title}}</h3>
+  <input ng-model='product.title'></input>
+  <h3>Handle : {{product.handle}}</h3>
+  <h3>ID : {{product.id}}</h3>
+  <h3>Product Type : {{ product.product_type}}</h3>
+  <input ng-model='product.product_type'></input>
+  <h3>Vendor : {{product.vendor}}</h3>
+  <input ng-model='product.vendor'></input>
+  <h3>Body_html : {{product.body_html}}</h3>
+  <input ng-model='product.body_html'></input>
+  <h3>images</h3>
+  <ul>
+    <li ng-repeat="image in product.images">
+      <img data-ng-src="data:image/jpeg;base64,{{image}}"/>
+    </li>
+  </ul>
+
+  <h3>Tags</h3>
+
+  <h5>Publish Scope : {{product.published_scope}}</h5>
+  <h5>Template_suffix : {{product.template_suffix}}</h5>
+  <h5>Created at : {{product.created_at}}</h5>
+  <h5>Updated at : {{product.updated_at}}</h5>
+  <h5>published at : {{product.published_at}}</h5>
+
+  <p ng-click='saveProduct()'>Save</p>
+  <p ng-click='resetProduct()'>Reset</p>
+</div>
