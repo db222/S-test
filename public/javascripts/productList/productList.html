@@ -1,6 +1,7 @@
 <div class='container'>
-  <p ng-click='newProduct()'>Create New Product</p>
-  <input ng-model='query'></input>
+  <button id='create-product-button' ng-click='newProduct()'>Create New Product</button>
+  <h3>Search<h3>
+  <input ng-model='query' placeholder='search'></input>
   <h4>Products</h4>
   <ul id='product-list'>
     <li ng-repeat="product in data.products | filter: query" ng-click='selectProduct(product.id)'>{{product.handle}}</li>

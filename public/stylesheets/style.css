@@ -61,14 +61,150 @@ table {
   *zoom: 1;
 }
 
+.container {
+  margin:5px;
+  padding: 5px;
+  border-style: solid;
+  border-color: #F5F6F7;
+  border-width: 2px;
+  background-color: #fff;
+}
+
+body {
+  font-family: 'Lucida Grande';
+  background-color: #EBEEF0;
+}
+
+button {
+  background-color: #96BF48;
+  color: #FFF;
+}
+
+button.destructive {
+  background-color: #CC4E4B;
+}
+
+#create-product-button {
+  display: block;
+}
+
 #product-list-container {
-  float:left;
+  display: inline-block;
+  float :left;
+  margin : 10px;
 }
 
 #product-editor-container {
-  float:right;
+  display: inline-block;
+  margin : 10px;
+  width: 70%;
 }
 
 #product-list { 
   list-style-type: none;
 }
+
+#product-list li {
+  margin:2px;
+  padding: 2px;
+  background-color: #EBEFF0;
+}
+
+#product-list li:hover{
+  background-color: #FAFEFF;
+}
+
+.button {
+  background-color: #96BF48;
+  color:#FFF;
+  padding: 2px;
+  margin:2px;
+}
+
+#identity-info-container {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #96BF48;
+  padding: 0;
+  padding-bottom: 3px;
+}
+
+#identity-info-container * {
+  margin: 2px;
+  padding: 2px;
+}
+
+#title-container * {
+  display: inline-block;
+  padding: 0px 10px;
+  width: auto;
+  font-size: 24;
+}
+
+#title-container input {
+  border: 0;
+  font-size: 18px;
+  width:auto;
+}
+
+.label {
+  background-color: #96BF48;
+  color:#FFF;
+  width:auto;
+  padding: 2px;
+}
+
+#title-container {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #96BF48;
+  background-color: #96BF48;
+  padding: 0;
+}
+
+#input-productType {
+  margin-left: 30px;
+  padding: 0 30px;
+  font-size: 18;
+}
+
+#images-container {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #96BF48;
+  background-color: #F5F5F5;
+}
+
+#images-container * {
+  font-size: 24;
+}
+
+#images-container ul {
+  padding: 15px;
+  margin: 5px;
+}
+
+#images-container .product-image {
+  height: 128px;
+  width: 128px;
+}
+
+#tags-container {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #96BF48;
+  padding: 0;
+}
+
+#tags-container * {
+  margin:2px;
+  padding: 2px;
+}
+
+#timestamp-info-container {
+  font-size: 12;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #96BF48;
+}
+
