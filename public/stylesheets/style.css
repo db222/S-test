@@ -104,8 +104,8 @@ button.destructive {
 
 #product-editor-container {
   display: inline-block;
-  margin : 10px;
-  width: 70%;
+  margin : 5px;
+  width: 800px;
 }
 
 #product-list { 
@@ -187,11 +187,14 @@ button.destructive {
 
 #images-container * {
   font-size: 24;
+  display: block; 
 }
 
 #images-container ul {
   padding: 15px;
   margin: 5px;
+  list-style-type: none;
+  display: inline-block;
 }
 
 #images-container .product-image {
@@ -241,11 +244,6 @@ button.destructive {
   background-color: #A5A5A5;
   display: inline-block;
 }
-
-/*#tags-container .tag p {
-  color:#555;
-  display: inline-block;
-}*/
 
 #tag-list {
   list-style-type: none;
