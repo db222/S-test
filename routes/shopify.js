@@ -67,15 +67,31 @@ router.put('/put', function(req, res) {
   }, 
   function (error, response, body) {
       console.log(response.statusCode);
-      console.lo
       if (!error && response.statusCode === 200 || response.statusCode === 201) {
         res.status(200).send(body);
       } else {
         console.log('the error : ', error);
-        //console.log(response);
         res.status(500).send(body);
       }
   });
 });
+
+router.delete('/delete', function(req, res) {
+  var path = req.query.path;
+
+  request({
+    url    : createURL(path),
+    method : 'DELETE'
+  },
+  function(error, response, body) {
+      console.log(response.statusCode);
+      if (!error && response.statusCode === 200 || response.statusCode === 201) {
+        res.status(200).send(body);
+      } else {
+        console.log('the error : ', error);
+        res.status(500).send(body);
+      }
+  })
+})
 
 module.exports = router;

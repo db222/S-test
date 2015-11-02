@@ -1,7 +1,12 @@
 var urlPathToFetchProducts = '/shopify/get?path=/admin/products.json';
 var urlPathToCreateNewProduct = 'shopify/post?path=/admin/products.json';
+
 var getPathToUpdateProduct = function(id) {
   return 'shopify/put?path=/admin/products/' + id + '.json';
+}
+
+var getPathToDeleteProduct = function(id) {
+  return 'shopify/delete?path=/admin/products/' + id + '.json';
 }
 
 function success(response) {
@@ -32,7 +37,6 @@ Inventory.prototype.saveProduct = function(product) {
 
 Inventory.prototype.updateProduct = function(product) {
   var context = this;
-  console.log('received in updateProduct', product);
   this.$http({
     method :'PUT',
     url    : getPathToUpdateProduct(product.id),
@@ -41,7 +45,15 @@ Inventory.prototype.updateProduct = function(product) {
       'Content-Type': 'application/json'
     }
   })
-  .then(success, error);
+  .then(function(response) {
+    var updateData = JSON.parse(response.config.data);
+    var index = this.products.findIndex(function(value, index, array) {
+      return value.id === updateData.id
+    });
+    if(index !== -1) {
+      this.product[index] = updateData;
+    }
+  }, error);
 }
 
 Inventory.prototype.createNewProduct = function(newProduct) {
@@ -55,6 +67,20 @@ Inventory.prototype.createNewProduct = function(newProduct) {
     }
   })
   .then(success, error);
+}
+
+Inventory.prototype.deleteProduct = function(product) {
+  var index = this.products.findIndex(function(value, index, array) {
+    return value.id === product.id;
+  });
+  if(index !== -1) {
+    this.products.splice(index, 1);
+    this.$http({
+      method : 'DELETE',
+      url    : getPathToDeleteProduct(product.id),
+    })
+    .then(success, error);
+  }
 }
 
 Inventory.prototype.retrieveProducts = function() {

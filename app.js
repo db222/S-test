@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var shopify = require('./routes/shopify');
 
 var app = express();
+var node_compass = require('node-compass');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,7 +22,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('node-compass')({mode: 'expanded'}));
+//app.use(require('node-compass')());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

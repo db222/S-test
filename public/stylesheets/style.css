@@ -94,6 +94,14 @@ button.destructive {
   margin : 10px;
 }
 
+#product-list-container div{
+  border-color: #96BF48;
+}
+
+#product-list-container div * {
+  margin: 2px;
+}
+
 #product-editor-container {
   display: inline-block;
   margin : 10px;
@@ -108,6 +116,7 @@ button.destructive {
   margin:2px;
   padding: 2px;
   background-color: #EBEFF0;
+  cursor:default;
 }
 
 #product-list li:hover{
@@ -152,6 +161,7 @@ button.destructive {
   color:#FFF;
   width:auto;
   padding: 2px;
+  cursor: default;
 }
 
 #title-container {
@@ -162,7 +172,7 @@ button.destructive {
   padding: 0;
 }
 
-#input-productType {
+#identity-info-container input {
   margin-left: 30px;
   padding: 0 30px;
   font-size: 18;
@@ -189,6 +199,17 @@ button.destructive {
   width: 128px;
 }
 
+#html-body-container {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #96BF48;
+}
+
+#html-body-container *{
+  margin: 2px;
+  font-size: 14;
+}
+
 #tags-container {
   border-width: 2px;
   border-style: solid;
@@ -199,6 +220,54 @@ button.destructive {
 #tags-container * {
   margin:2px;
   padding: 2px;
+  cursor: default
+}
+
+#tags-container .tag {
+  font-size: 12;
+  border-radius: 2px;
+  background-color: #A5A5A5;
+  color: #FFF;
+  display: inline-block;
+  padding: 4px;
+}
+
+.delete-button {
+  color: #555;
+  background-color: #A5A5A5;
+  display: inline-block;
+}
+
+/*#tags-container .tag p {
+  color:#555;
+  display: inline-block;
+}*/
+
+#tag-list {
+  list-style-type: none;
+}
+
+#variants-container {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #96BF48;
+}
+
+#variants-container * {
+  margin: 2px;
+  padding: 2px;
+}
+
+#variants-container #options-values {
+  width: 60%;
+}
+
+#variants-container .label {
+  margin:1px;
+}
+
+#option-container input {
+  display: inline-block;
 }
 
 #timestamp-info-container {
@@ -207,4 +276,9 @@ button.destructive {
   border-style: solid;
   border-color: #96BF48;
 }
+
+#delete-object-button {
+  float:right;
+}
+
 

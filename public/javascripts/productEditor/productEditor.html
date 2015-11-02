@@ -1,4 +1,4 @@
-<div class='container' id='product-editor-container' ng-model='product'>
+<div class='container' id='product-editor-container' ng-model='editProductInterface.product'>
   <div id='identity-info-container' class='container'>
     <div id='title-container' class='container'>
       <h3 class='label'>Title</h3>
@@ -8,29 +8,45 @@
     <h5>ID : {{product.id}}</h3>
     <h4>Product Type</h3> 
     <input id='input-productType' ng-model='product.product_type'></input>
+    <h3>Vendor</h3>
+  <input ng-model='product.vendor'></input>
   </div>
   
-  <h3>Vendor</h3>
-  <input ng-model='product.vendor'></input>
-  <h3>Body_html :</h3>
-  <input ng-model='product.body_html'></input>
+  
+  
   <div id='images-container' class='container'>
     <h3 class='label'>Images</h3>
+    <input type='file' name='file' onchange="angular.element(this).scope().uploadFile(this.files)"/>
     <ul>
       <li ng-repeat="image in product.images">
         <img class='product-image' data-ng-src="{{image.src}}"/>
       </li>
     </ul>
   </div>
-
+  <div class='container' id="html-body-container">
+    <h3 class='label'>Body_html</h3>
+    <p>{{product.body_html}}</p>
+    <input ng-model='product.body_html'></input>
+  </div>
   <div class='container' id='tags-container'>
     <h3 class='label'>Tags</h3>
     <input ng-model='newTag' placeholder='enter a new tag'></input>
     <button ng-click='addTag()'>Add</button>
-    <ul> 
-      <li ng-repeat="tag in tags">{{tag}}
+    <ul id='tag-list'> 
+      <li class='tag' ng-repeat="tag in tags">{{tag}}
+        <p class='delete-button' ng-click='removeTag(tag)'> X</p>
       </li>
     </ul>
+  </div>
+
+  <div id='variants-container' class='options'>
+    <p class='label'>Variants</p>
+    <button ng-click='addVariant()'>Add another option</button>
+    <div id='option-container' ng-repeat='option in variants.inUse'>
+      <input placeholder='enter option title'></input>
+      <input id='options-values'placeholder='seperate options with a comma'></input>
+      <p class='delete-button' ng-click='removeOptionType()'=>X</p>
+    </div>
   </div>
 
   <h5>Publish Scope : {{product.published_scope}}</h5>
@@ -41,6 +57,9 @@
     <p>Published at : {{product.published_at}}</h5>
   </div>
 
+
+
   <button ng-click='saveProduct()'>Save</button>
   <button ng-click='resetProduct()' class='destructive'>Reset</button>
+  <button ng-click='deleteProduct()' class='destructive' id='delete-object-button'>Delete</button>
 </div>

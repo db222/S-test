@@ -1,30 +1,52 @@
-angular.module('productManager.productEditor', []) 
+angular.module('productManager.productEditor', ['base64']) 
+.controller('productEditorController', ['$base64', '$rootScope', '$scope', 'Inventory', function ($base64, $rootScope, $scope, Inventory) {
+  var init = function(product) {
+    $scope.product = {};
+    $scope.tags = [];
+    $scope.newTag = '';
+    $scope.variants = { 
+                      inUse   : []
+                    };
 
-.controller('productEditorController', ['$rootScope', '$scope', 'Inventory', '$sanitize', function ($rootScope, $scope, Inventory, $sanitize) {
-  $scope.product = {}
-  $scope.tags = [];
+    if(product) {
+      $scope.product = jQuery.extend(true, {}, product);
+      if(product.tags.length) {
+        $scope.tags = $scope.product.tags.split(', ');
+      }
+    }
+  }
+
+  init();
+
   var toUnbind = [];
   toUnbind.push($rootScope.$on('Inventory.productSelected', function(){ 
-    $scope.product = jQuery.extend(true, {}, Inventory.getSelectedProduct());
-    $scope.tags = $scope.product.tags.split(", ");
+    init(Inventory.getSelectedProduct());
     for(var key in $scope.product) {
-      console.log('this is the key ' + key + ' this is the value ' + $scope.product[key]);
       if(key === 'options') {
-        for(var optKey in $scope.product[key]) {
-          console.log('option : ' + optKey + ' the value is ', $scope.product[key][optKey]);
-        }
+        console.log($scope.product[key]);
       }
     }
 
   }));
 
   toUnbind.push($rootScope.$on('productList.createNewProduct', function() {
-    $scope.product = {};
-    $scope.tags = [];
+    init();
   }));
 
   $scope.addTag = function() {
+    if($scope.newTag.length) {
+      if($scope.tags.indexOf($scope.newTag) === -1) {
+        $scope.tags.push($scope.newTag);
+        $scope.newTag = '';
+      }
+    }
+  }
 
+  $scope.removeTag = function(tag) {
+    var index = $scope.tags.indexOf(tag);
+    if(index !== -1) {
+      $scope.tags.splice(index, 1);
+    }
   }
 
   $scope.saveProduct = function() {
@@ -34,11 +56,29 @@ angular.module('productManager.productEditor', [])
     }
   }
 
+  $scope.deleteProduct = function() {
+    if($scope.product) {
+      Inventory.deleteProduct($scope.product);
+      init();
+    }
+  }
+
   $scope.resetProduct = function() {
     if($scope.product) {
       $scope.product = $.extend(true, {}, Inventory.retrieveProductByID($scope.product.id));
     }
   }
+
+  $scope.uploadFile = function(files) {
+    if(!fileInput.files[0].name.match(/\.(jpg|jpeg|png|gif)$/)){
+      return;
+    }
+
+  }
+
+  $scope.addVariant = function() {
+    $scope.variants.inUse.push('');
+  };
 
   $scope.$on('$destroy', function() { 
     for(var i = 0; i < toUnbind.length; ++i) {
