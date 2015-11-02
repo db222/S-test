@@ -199,6 +199,10 @@ button.destructive {
   width: 128px;
 }
 
+#images-container input {
+  font-size: 14;
+}
+
 #html-body-container {
   border-width: 2px;
   border-style: solid;

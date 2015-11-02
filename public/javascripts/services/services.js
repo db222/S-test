@@ -47,11 +47,11 @@ Inventory.prototype.updateProduct = function(product) {
   })
   .then(function(response) {
     var updateData = JSON.parse(response.config.data);
-    var index = this.products.findIndex(function(value, index, array) {
-      return value.id === updateData.id
+    var index = context.products.findIndex(function(value, index, array) {
+      return value.id === updateData.product.id
     });
     if(index !== -1) {
-      this.product[index] = updateData;
+      context.products[index] = updateData.product;
     }
   }, error);
 }

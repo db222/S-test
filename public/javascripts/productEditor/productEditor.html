@@ -22,6 +22,11 @@
         <img class='product-image' data-ng-src="{{image.src}}"/>
       </li>
     </ul>
+    <ul>
+      <li ng-repeat='aImage in addedImages'>
+        <img class='product-image' data-ng-src="{{aImage}}"/>
+      </li>
+    </ul>
   </div>
   <div class='container' id="html-body-container">
     <h3 class='label'>Body_html</h3>
@@ -49,8 +54,8 @@
     </div>
   </div>
 
-  <h5>Publish Scope : {{product.published_scope}}</h5>
-  <h5>Template_suffix : {{product.template_suffix}}</h5>
+  <!--<h5>Publish Scope : {{product.published_scope}}</h5>
+  <h5>Template_suffix : {{product.template_suffix}}</h5>-->
   <div id='timestamp-info-container' class='container'>
     <p>Created at : {{product.created_at}}</h5>
     <p>Updated at : {{product.updated_at}}</h5>
